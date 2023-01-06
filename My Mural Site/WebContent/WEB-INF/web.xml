@@ -1,0 +1,10 @@
+<web-app>
+	<servlet>
+		<servlet-name>MuralServlet</servlet-name>
+		<servlet-class>servlet.MuralServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MuralServlet</servlet-name>
+		<url-pattern>/mural</url-pattern>
+	</servlet-mapping>
+</web-app>

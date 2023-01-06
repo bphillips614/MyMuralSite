@@ -1,0 +1,420 @@
+body, html {
+	font-family: Arial;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+hr {
+	border-bottom: 0;
+	border-left: 0;
+	border-right: 0;
+	border-color: #000;
+	margin: 0;	
+}
+
+#nav {
+	position: absolute;
+	background-color: rgba(255,255,255,0.5);
+	width: 100%;
+	z-index: 1;
+}
+
+#logo {
+    position: absolute;
+    font-size: 32px;
+    left: 18px;
+    top: 7px;
+    font-weight: bold;
+    color: #FFF;
+    user-select: none;
+    cursor: default;
+}
+
+#nav ul {
+	padding-left: 24px;
+	cursor: default;
+}
+
+#nav li {
+	list-style-type: none;
+	display: inline;
+	margin: 12px 6px;
+	position: relative;
+}
+
+.nav-active:after {
+	content: '';
+    position: absolute;
+    height: 6px;
+    width: 6px;
+    background-color: #FFF;
+    border-radius: 50%;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#settings-icon {
+	bottom: 12px;
+	right: 12px;
+	position: absolute;
+	padding-right: 4px;
+}
+
+#settings-icon svg {
+	height: 20px;
+	fill: rgba(255,255,255,0.5);
+	cursor: pointer;
+}
+
+#settings-icon svg:hover {
+	fill: rgba(255,255,255,0.7);
+}
+
+.close {
+	position: absolute;
+	font-size: 28px;
+	cursor: pointer;
+	user-select: none;
+}
+
+.close:hover {
+	opacity: 0.5;
+}
+
+.button {
+	cursor: pointer;
+	user-select: none;
+	background-color: rgba(255,255,255,0.6);
+	padding: 2px 6px;
+	border-radius: 2px;
+}
+
+.button:hover {
+	background-color: rgba(255,255,255,1);
+}
+
+#nav li:first-child {
+	margin-left: 40px;
+}
+
+#main {
+	height: 100%;
+	width: 100%;
+}
+
+.main-bkg {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+	position: absolute;
+	top: 0;
+}
+
+.main-center {
+	position: absolute;
+	top: calc(50% + 25px);
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: rgba(255,255,255,0.5);
+	padding: 24px 48px;
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+.main-center-front {
+	width: 400px;
+	height: 119px;
+}
+
+.hidden {
+	display: none;
+}
+
+.main-center-back {
+	width: 400px;
+	height: 250px;
+}
+
+.main-street {
+	font-weight: bolder;
+	font-size: 24px;
+	margin: 0;
+}
+
+.main-center hr {
+	border-color: rgba(0,0,0,0.1);
+}
+
+.main-artist {
+	padding: 2px 0 24px;
+	margin: 0;
+	color: #333;
+}
+
+.main-blurb {
+	background-color: rgba(255,255,255,0.8);
+	padding: 12px 20px;
+	border-radius: 3px;
+	margin: 0 0 24px;
+	height: 155px;
+	overflow: auto;
+	font-size: 14px;
+}
+
+.main-center-button {
+	text-align: center;
+	margin: 24px 0 0;
+	display: inline-block;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.main-arrow {
+	position: absolute;
+	cursor: pointer;
+	user-select: none;
+}
+
+.main-arrow {
+	background-image: linear-gradient(to right, rgba(255,255,255,0.5), rgba(255,255,255,.0));
+}
+
+.main-arrow:hover {
+	background-image: linear-gradient(to right, rgba(255,255,255,0.8), rgba(255,255,255,.0));
+}
+
+.main-arrow:hover svg {
+	fill: rgba(255,255,255,1);
+}
+
+.main-next {
+    right: 0px;
+    transform: rotate(180deg);
+    top: -6px;
+}
+
+.main-next-front {
+	padding: 67px 6px;
+}
+
+.main-prev {
+	left: 0;
+    top: 0;
+}
+
+.main-prev-front {
+	padding: 66px 6px;
+}
+
+.main-arrow svg {
+	height: 36px;
+	fill: rgba(255,255,255,0.6);
+}
+
+.main-next-back {
+	padding: 132px 6px;
+}
+
+.main-prev-back {
+	padding: 131px 6px;
+}
+
+#library {
+	background-color: rgba(0,0,0,.8);
+	position: absolute;
+	top: 51px;
+	height: calc(100% - 51px);
+	width: 100%;
+}
+
+.library-mural-add {
+	background-color: rgba(255,255,255,.5);
+	position: relative;
+}
+
+.library-mural-add-pic {
+	height: 100px;
+	position: absolute;
+	top: 25px;
+	left: 25px;
+}
+
+.library-mural-add:hover {
+	background-color: rgba(255,255,255,.8);
+	transition-property: background-color;
+	transition-duration: 250ms;
+}
+
+.library-mural {
+	height: 150px;
+	width: 150px;
+	display: inline-block;
+	margin: 24px 0 0 24px;
+	overflow: hidden;
+	cursor: pointer;
+	border-radius: 2px;
+}
+
+.library-mural-pic {
+	object-fit: cover;
+	object-position: center;
+	width: 100%;
+	height: 100%;
+}
+
+.library-mural:hover .library-mural-pic {
+	width: 155px;
+	transition-property: width;
+	transition-duration: 500ms;
+}
+
+#settings-container {
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+}
+
+#settings {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255,255,255,0.7);
+    border-radius: 3px;
+}
+
+#settings > div {
+	display: inline-block;
+}
+
+#settings-nav {
+	padding: 12px;
+}
+
+.settings-nav-icon {
+	background-color: #FFF;
+	border: 1px solid #000;
+	border-radius: 2px;
+	margin: 0 0 12px;
+	height: 46px;
+	width: 46px;
+	position: relative;
+	cursor: pointer;
+}
+
+.settings-nav-icon.active-settings {
+	background-color: #000;
+}
+
+.settings-nav-icon:not(.active-settings):hover {
+	background-color: #EEE;
+}
+
+.settings-nav-icon.active-settings svg {
+	fill: #FFF;	
+}
+
+.mural-icon {
+	position: absolute;
+	height: 28px;
+	width: 26px;
+	left: 10px;
+	top: 8px;
+}
+
+.neighborhood-icon {
+	position: absolute;
+	height: 34px;
+	width: 34px;
+	left: 11px;
+	top: 10px;
+}
+
+#settings-main {
+	border-left: 1px solid;
+	float: right;
+	padding: 12px;
+}
+
+#settings .close {
+	top: 4px;
+	right: 12px;
+}
+
+#settings input, #settings select, #admin-photo-button {
+    border: 0;
+    border-radius: 3px;
+    background-color: #000;
+    color: #FFF;
+    font-size: 14px;
+}
+
+#admin-photo-button {
+	display: block;
+    padding: 4px 7px;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 143px;
+    white-space: nowrap;
+}
+
+#settings input:focus, #settings select:focus {
+	outline: none;
+}
+
+#settings input {
+	padding: 4px 6px;
+}
+
+#settings select {
+	width: 100%;
+	padding: 3px;
+	cursor: pointer;
+}
+
+#admin-header {
+    margin: 0;
+    font-size: 18px;
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+#settings table tr td {
+	padding: 3px;
+}
+
+#settings label:not(#admin-photo-button) {
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.info-icon {
+	height: 16px;
+	fill: #000;
+	padding-top: 3px;
+}
+
+.admin-save-button {
+	background-color: #FFF;
+    border: 1px solid #000;
+    border-radius: 2px;
+    position: relative;
+    cursor: pointer;
+    width: 46px;
+    padding: 4px 14px;
+    text-align: center;
+    margin: 12px auto 5px;
+}
+
+.admin-save-button:hover {
+	background-color: #EEE;
+}
