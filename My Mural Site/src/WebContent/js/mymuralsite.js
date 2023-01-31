@@ -3,6 +3,7 @@ const INFO = `<svg class="info-icon" xmlns="http://www.w3.org/2000/svg" viewBox=
 const MURAL = `<svg class="mural-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M22 11.702v10.298h-20v-10.227c.588.573 1.256 1.095 2 1.555v6.672h16v-6.723c.743-.464 1.406-.996 2-1.575zm2-7.702c0 5.218-4.122 10.5-12 10.5-8.245 0-12-5.443-12-10.5h2v-2h20v2h2zm-22.939 1c.118 1.078.429 2.154.939 3.161v-3.161h-.939zm10.939 8.5c3.484 0 6.158-1.118 8-2.8v-6.7c-.553 0-2 .203-2 2v1.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5v-.5c0-.552-.447-1-1-1s-1 .448-1 1v4c0 .552-.447 1-1 1s-1-.448-1-1v-3c0-.552-.447-1-1-1s-1 .448-1 1v1.5c0 .829-.672 1.5-1.5 1.5s-1.5-.671-1.5-1.5v-3.5c0-1.766-1.447-2-2-2v6.774c1.803 1.632 4.442 2.726 8 2.726zm10.938-8.5h-.938v3.096c.502-.981.817-2.031.938-3.096z"/></svg>`;
 const NEIGHBORHOOD = `<svg class="neighborhood-icon" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M6 7v-7h13v10h5v14h-23v-17h5zm0 16v-4h-1v4h1zm8-4h-3v4h3v-4zm6 0h-1v4h1v-4zm2-7h-3v6h2v4h1v-10zm-5-10h-9v20h1v-5h7v5h1v-20zm-13 20v-4h2v-9h-3v13h1zm17-6h-1v-2h1v2zm-17-2h1v2h-1v-2zm8 1h-2v-2h2v2zm3 0h-2v-2h2v2zm-10-4v2h-1v-2h1zm7 1h-2v-2h2v2zm3 0h-2v-2h2v2zm-3-3h-2v-2h2v2zm3 0h-2v-2h2v2zm-3-3h-2v-2h2v2zm3 0h-2v-2h2v2z"/></svg>`;
 const ADD = `<svg class="library-mural-add-pic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z"/></svg>`;
+const DEFAULT_MURAL = `<svg class="default-mural" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 21.832c4.587.38 2.944-4.493 7.188-4.538l1.838 1.534c.458 5.538-6.315 6.773-9.026 3.004zm14.065-7.115c1.427-2.239 5.847-9.749 5.847-9.749.352-.623-.43-1.273-.976-.813 0 0-6.572 5.714-8.511 7.525-1.532 1.432-1.539 2.086-2.035 4.447l1.68 1.4c2.227-.915 2.868-1.039 3.995-2.81zm-11.999 3.876c.666-1.134 1.748-2.977 4.447-3.262.434-2.087.607-3.3 2.547-5.112 1.373-1.282 4.938-4.409 7.021-6.229-1-2.208-4.141-4.023-8.178-3.99-6.624.055-11.956 5.465-11.903 12.092.023 2.911 1.081 5.571 2.82 7.635 1.618.429 2.376.348 3.246-1.134zm6.952-15.835c1.102-.006 2.005.881 2.016 1.983.004 1.103-.882 2.009-1.986 2.016-1.105.009-2.008-.88-2.014-1.984-.013-1.106.876-2.006 1.984-2.015zm-5.997 2.001c1.102-.01 2.008.877 2.012 1.983.012 1.106-.88 2.005-1.98 2.016-1.106.007-2.009-.881-2.016-1.988-.009-1.103.877-2.004 1.984-2.011zm-2.003 5.998c1.106-.007 2.01.882 2.016 1.985.01 1.104-.88 2.008-1.986 2.015-1.105.008-2.005-.88-2.011-1.985-.011-1.105.879-2.004 1.981-2.015zm10.031 8.532c.021 2.239-.882 3.718-1.682 4.587l-.046.044c5.255-.591 9.062-4.304 6.266-7.889-1.373 2.047-2.534 2.442-4.538 3.258z"/></svg>`;
 
 var murals = [];
 
@@ -21,36 +22,25 @@ function getPage() {
 }
 
 function initHome() {
-	var html = `
-		<img id="mural-bkg-1" class="main-bkg active-bkg" src="images/map_of_what_is_effortless.jpeg"/>
-		<img id="mural-bkg-2" class="main-bkg hidden" src="images/irene.jpeg"/>
-		<div id="mural-1" class="main-center active-mural">
+	console.log("in initHome");
+	console.log(murals);
+	var html = "";
+
+	var bkgState = "active-bkg";
+	for (var i = 0; i < murals.length; i++) {
+		html += `<img id="mural-bkg-${i + 1}" class="main-bkg ${bkgState}" src="data:image/png;base64,${murals[i].photo}"/>`;
+		bkgState = "hidden";
+	}
+
+	var contentState = "active-mural";
+	for (var i = 0; i < murals.length; i++) {
+		html += 
+		`<div id="mural-${i + 1}" class="main-center ${contentState}">
 			<div class="main-center-front">
-				<p class="main-street">North Ave & Highland Ave</p>
-				<p class="main-artist">Jonathon Doberson</p>
+				<p class="main-street">${murals[i].street}</p>
+				<p class="main-artist">${murals[i].artist}</p>
 				<hr>
-				<p class="main-read-praise main-center-button button">Read Praise</p>
-			</div>
-			<div class="main-center-back hidden">
-				<p class="main-blurb">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam elementum vulputate ipsum, sed vehicula velit viverra vitae. Praesent sit amet mattis mi. Praesent pretium ornare pellentesque. Sed eu efficitur lorem, vel consectetur nulla. Morbi aliquam quam quis felis fringilla sodales. Pellentesque metus arcu, iaculis ullamcorper convallis et, condimentum in sem. Interdum et malesuada fames ac ante ipsum primis in faucibus. In est turpis, interdum et nisi rhoncus, auctor congue massa. Donec tincidunt, quam vitae accumsan convallis, turpis ipsum hendrerit tortor, nec semper nisl magna sed ante. Nulla ante sapien, molestie id scelerisque eu, pharetra quis neque. Donec a volutpat libero. Aliquam erat volutpat. Praesent rhoncus quam nec semper sollicitudin. Nunc lacinia finibus nisl non tempus.
-				</p>
-				<hr>
-				<p class="main-return main-center-button button">Back</p>
-			</div>
-			<div class="main-next main-arrow main-next-front">
-				${ARROW}
-			</div>
-			<div class="main-prev main-arrow main-prev-front">
-				${ARROW}
-			</div>
-		</div>
-		<div id="mural-2" class="main-center hidden">
-			<div class="main-center-front">
-				<p class="main-street">Trinity Pl & Howard Ave</p>
-				<p class="main-artist">Janice Dieugh</p>
-				<hr>
-				<p class="main-read-praise main-center-button button">Read Praise</p>
+				<p class="main-read-praise main-center-button button">Learn More</p>
 			</div>
 			<div class="main-center-back hidden">
 				<p class="main-blurb">
@@ -66,6 +56,8 @@ function initHome() {
 				${ARROW}
 			</div>
 		</div>`;
+		contentState = "hidden";
+	}
 
 	// show home page
 	$("#main").append(html);
@@ -365,6 +357,7 @@ function getAllMurals() {
 		dataType: "json",
 		success: (data) => {
 			data.forEach(mural => murals.push(JSON.parse(mural)));
+			initHome();
 		},
 		error: (xhr) => {
 			console.error(xhr);
@@ -374,5 +367,4 @@ function getAllMurals() {
 
 $(document).ready(() => {
 	getAllMurals();
-	initHome();
 });
