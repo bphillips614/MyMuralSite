@@ -24,7 +24,7 @@ public class MuralServlet extends HttpServlet {
 		switch (action) {
 			case "get": {
 				MuralService muralService = new MuralService();
-				message = muralService.getMurals();
+				message = muralService.getMuralsAndNeighborhoods();
 				break;
 			}
 			case "add": {

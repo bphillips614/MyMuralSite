@@ -78,7 +78,6 @@ public class MuralService {
                     conn.close();
                 }
             } catch (SQLException ex) {
-//                message = ex.getMessage();
             	System.out.println(ex.getMessage());
             }
         }
@@ -86,10 +85,12 @@ public class MuralService {
         return "";
     }
 	
-	public String getMurals() {
+	public String getMuralsAndNeighborhoods() {
 
         Connection conn = null;
+        JSONObject muralsAndNeighborhoods = Json.createObjectBuilder().build();
         JSONArray murals = new JSONArray();
+        JSONArray neighborhoods = new JSONArray();
         try {
             // db parameters
             String url = SQL_DB;
@@ -97,6 +98,7 @@ public class MuralService {
             conn = DriverManager.getConnection(url);
             System.out.println("Connection to SQLite has been established.");
             
+            // Get murals
             String query = "select m.id, m.neighborhood, m.artist, m.discovery_date, "
             		+ "m.last_visit_date, m.current, m.latitude, m.longitude, m.street, p.photo "
             		+ "from murals m join photos p on m.photo_id = p.id;";
@@ -118,7 +120,25 @@ public class MuralService {
 				
 				murals.put(mural.createJson());
             }
-            return murals.toString();
+
+            // Get neighborhoods
+            query = "select n.id, n.neighborhood, p.photo from neighborhoods n"
+                    + "join photos p on n.logo_id = p.photo_id;";
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String neighborhood = rs.getString(2);
+                String logo = rs.getString(3);
+
+                Neighborhood neighborhood = new Neighborhood(id, neighborhood, logo);
+
+                neighborhoods.put(neighborhood.createJson());
+            }
+
+            muralsAndNeighborhoods.add("murals", murals.toString());
+            muralsAndNeighborhoods.add("neighborhoods", neighborhoods.toString());
+            return muralsAndNeighborhoods.toString();
             
         } catch (SQLException e) {
         	System.out.println(e.getMessage());
