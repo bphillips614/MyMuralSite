@@ -126,7 +126,7 @@ public class MuralService {
 
             // Get neighborhoods
             query = "select n.id, n.neighborhood, p.photo from neighborhoods n"
-                    + "join photos p on n.logo_id = p.photo_id;";
+                    + " join photos p on n.logo_id = p.id;";
             stmt = conn.createStatement();
             rs = stmt.executeQuery(query);
             while (rs.next()) {
