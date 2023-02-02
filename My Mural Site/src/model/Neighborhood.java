@@ -6,10 +6,10 @@ public class Neighborhood {
     private String name;
     private Photo logo;
 
-    public Neighborhood(int id, String name, Photo logo) {
+    public Neighborhood(int id, String name, String logoBase64) {
         this.id = id;
         this.name = name;
-        this.logo = logo;
+        logo = new Photo(logoBase64);
     }
 
     public int getId() {

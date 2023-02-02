@@ -8,8 +8,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
+
 
 import model.Mural;
+import model.Neighborhood;
 import model.Photo;
 
 import static util.Constants.SQL_DB;
@@ -88,7 +91,7 @@ public class MuralService {
 	public String getMuralsAndNeighborhoods() {
 
         Connection conn = null;
-        JSONObject muralsAndNeighborhoods = Json.createObjectBuilder().build();
+        JSONObject muralsAndNeighborhoods = new JSONObject();
         JSONArray murals = new JSONArray();
         JSONArray neighborhoods = new JSONArray();
         try {
@@ -128,16 +131,16 @@ public class MuralService {
             rs = stmt.executeQuery(query);
             while (rs.next()) {
                 int id = rs.getInt(1);
-                String neighborhood = rs.getString(2);
+                String name = rs.getString(2);
                 String logo = rs.getString(3);
 
-                Neighborhood neighborhood = new Neighborhood(id, neighborhood, logo);
+                Neighborhood neighborhood = new Neighborhood(id, name, logo);
 
                 neighborhoods.put(neighborhood.createJson());
             }
 
-            muralsAndNeighborhoods.add("murals", murals.toString());
-            muralsAndNeighborhoods.add("neighborhoods", neighborhoods.toString());
+            muralsAndNeighborhoods.put("murals", murals.toString());
+            muralsAndNeighborhoods.put("neighborhoods", neighborhoods.toString());
             return muralsAndNeighborhoods.toString();
             
         } catch (SQLException e) {
