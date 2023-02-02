@@ -29,16 +29,16 @@ public class Neighborhood {
     }
 
     public Photo getLogo() {
-        return photo;
+        return logo;
     }
 
     public void setLogo(Photo logo) {
-        this.logo = logo
+        this.logo = logo;
     }
 
     public String createJson() {
 		return "{\"id\":" + this.id + 
-				", \"neighborhood\":\"" + this.neighborhood + 
-				"\", \"photo\":\"" + this.photo.toString() + "\"}";
+				", \"neighborhood\":\"" + this.name + 
+				"\", \"photo\":\"" + this.logo.toString() + "\"}";
 	}
 }
