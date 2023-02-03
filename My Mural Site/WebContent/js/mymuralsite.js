@@ -198,9 +198,7 @@ function initSettings() {
 							<td><label>Neighborhood</label></td>
 							<td>
 								<select id="admin-neighborhood">
-									<option value="1">Ponce</option>
-									<option value="2">Decatur</option>
-									<option value="3">Cabbagetown</option>
+									${getSettingsNeighborhoodOptions()}
 								</select>
 							</td>
 							<td>${INFO}</td>
@@ -296,6 +294,14 @@ function initSettings() {
 	
 	// save mural
 	$("#mural-add").click(constructAddMuralJson);
+}
+
+function getSettingsNeighborhoodOptions() {
+	var html = ``;
+	for (var i = 0; i < neighborhoods.length; i++) {
+		html += `<option value="${neighborhoods[i].id}">${neighborhoods[i].neighborhood}</option>`;
+	}
+	return html;
 }
 
 function constructAddMuralJson() {
