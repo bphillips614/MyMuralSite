@@ -1,0 +1,4 @@
+Possible page/campaign: Artist Spotlight
+- Concerns: new artist table containing spotlight copy and photo id
+
+Photos should be .JPG to avoid massive base64 strings

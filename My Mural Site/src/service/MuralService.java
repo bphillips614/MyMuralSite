@@ -52,7 +52,7 @@ public class MuralService {
             }
             
             // Insert mural
-            String sqlMural = "INSERT INTO murals(neighborhood, artist, discovery_date, last_visit_date, current, latitude, longitude, street, photo_id)" +
+            String sqlMural = "INSERT INTO murals(neighborhood_id, artist, discovery_date, last_visit_date, current, latitude, longitude, street, photo_id)" +
             		" VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmtMural = conn.prepareStatement(sqlMural);
             pstmtMural.setInt(1, mural.getNeighborhood());
@@ -102,7 +102,7 @@ public class MuralService {
             System.out.println("Connection to SQLite has been established.");
             
             // Get murals
-            String query = "select m.id, m.neighborhood, m.artist, m.discovery_date, "
+            String query = "select m.id, m.neighborhood_id, m.artist, m.discovery_date, "
             		+ "m.last_visit_date, m.current, m.latitude, m.longitude, m.street, p.photo "
             		+ "from murals m join photos p on m.photo_id = p.id;";
             Statement stmt = conn.createStatement();
@@ -125,8 +125,8 @@ public class MuralService {
             }
 
             // Get neighborhoods
-            query = "select n.id, n.neighborhood, p.photo from neighborhoods n"
-                    + " join photos p on n.logo_id = p.id;";
+            query = "select n.id, n.neighborhood, p.photo from neighborhoods n "
+                    + "left join photos p on n.logo_id = p.id;";
             stmt = conn.createStatement();
             rs = stmt.executeQuery(query);
             while (rs.next()) {
@@ -139,8 +139,8 @@ public class MuralService {
                 neighborhoods.put(neighborhood.createJson());
             }
 
-            muralsAndNeighborhoods.put("murals", murals.toString());
-            muralsAndNeighborhoods.put("neighborhoods", neighborhoods.toString());
+            muralsAndNeighborhoods.put("murals", murals);
+            muralsAndNeighborhoods.put("neighborhoods", neighborhoods);
             return muralsAndNeighborhoods.toString();
             
         } catch (SQLException e) {
